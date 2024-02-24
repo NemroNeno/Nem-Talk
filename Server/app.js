@@ -35,29 +35,36 @@ const server = app.listen(3200, (req, res) => {
 
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "*",
   },
 });
 
+
+
+
+
+let prevRoom=null;
 io.on("connection", (socket) => {
   // console.log('socket is connected successfully');
 
   socket.on("setup", (userData) => {
-    socket.join(userData);
     socket.emit("connected");
   });
+  
 
   socket.on("join_chat", (room) => {
+    if(prevRoom){
+      socket.leave(prevRoom);
+    }
     socket.join(room);
+    prevRoom=room;
+    
     console.log("User has joined this room " + room);
   });
 
   socket.on("newMessage", (newMessageRecieved) => {
-    console.log("Message sent");
-    var chat = newMessageRecieved.chat;
-    chat.users.forEach((user) => {
-      if (user._id == newMessageRecieved.sender_id) return;
-      socket.in(chat._id).emit("messageRecieved", newMessageRecieved);
-    });
+    console.log(newMessageRecieved);
+
+    io.to(newMessageRecieved.room).emit("messageRecieved", newMessageRecieved);
   });
 });
