@@ -51,6 +51,10 @@ io.on("connection", (socket) => {
     socket.emit("connected");
   });
   
+  socket.on("typing",(packet)=>{
+    console.log(packet);
+    io.to(packet.room).emit("typingEvent",packet);
+  })
 
   socket.on("join_chat", (room) => {
     if(prevRoom){

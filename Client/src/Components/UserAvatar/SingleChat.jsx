@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useAuth } from "../Authentication/Context/auth";
+import { motion } from "framer-motion";
 import {
   Box,
   FormControl,
@@ -8,6 +9,7 @@ import {
   Spinner,
   Text,
   useToast,
+  keyframes,
 } from "@chakra-ui/react";
 import {
   ArrowBackIcon,
@@ -31,7 +33,22 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   const [loading, setLoading] = useState(false);
   const [newMessage, setNewMessage] = useState("");
   const [socketConnected, setSocketConnected] = useState(false);
+  const [isTyping, setIsTyping] = useState(false);
+
   const socket = useMemo(() => io(ENDPOINT), []);
+
+  useEffect(() => {
+    socket.on("typingEvent", (packet) => {
+      if (packet?.auth === auth?.user?._id || isTyping === true) {
+        return;
+      } else {
+        setIsTyping(true);
+        setTimeout(() => {
+          setIsTyping(false);
+        }, 5000);
+      }
+    });
+  }, []);
 
   useEffect(() => {
     const handleNewMessage = (newMessageReceived) => {
@@ -145,7 +162,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                 <ProfileModal user={getUser(auth.user, selectedChat.users)} />
               </>
             ) : (
-              <>{selectedChat.chatName.toUpperCase()}</>
+              <div>{selectedChat.chatName.toUpperCase()}</div>
             )}
             <GroupUpdate
               fetchAgain={fetchAgain}
@@ -175,11 +192,18 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
             ) : (
               <>
                 <div className="messages">
-                  <ScrollableChat messages={messages} />
+                  <ScrollableChat messages={messages} socket={socket} />
                 </div>
               </>
             )}
-
+            {
+              <div
+                hidden={!isTyping}
+                className="p-2 animate-pulse duration-50 font-bold text-[#0c31ecd7]"
+              >
+                Typing...
+              </div>
+            }
             <FormControl
               onKeyDown={sendMessage}
               isRequired

@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { useEffect,useState } from 'react'
 import ScrollableFeed from 'react-scrollable-feed'
 import { useAuth } from '../Authentication/Context/auth'
 
-const ScrollableChat = ({messages}) => {
+const ScrollableChat = ({messages,socket}) => {
+const [animate,setAnimate]=useState(false);
 const[auth,setAuth]= useAuth();
+
+
+
 const isSameSender= (messages,m,i,userId)=>{
     return (
         i<messages.length-1 && (messages[i+1].sender_id!==m.sender_id
@@ -60,7 +64,10 @@ const isLastMessage = (messages,i,userId)=>{
               }}>
              {m.content} 
               </span>
+        
              </div>
+            
+
         ))}
     </ScrollableFeed>
   )
