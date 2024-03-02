@@ -82,7 +82,7 @@ export const LoginController = async (req, res) => {
         message: "Wrong Email or Password!",
       });
     }
-    const token = jwt.sign({ _id: dataUser._id }, process.env.KEY, {
+    const token = jwt.sign({ _id: dataUser._id }, process.env.JWT_SECRET, {
       expiresIn: "7d",
     });
     console.log(token);
@@ -104,6 +104,7 @@ export const LoginController = async (req, res) => {
       });
     }
   } catch (error) {
+    console.log(error);
     return res.status(500).send({
       message: "Something went wrong on the Server!",
       error,
