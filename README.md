@@ -6,12 +6,12 @@
 ![Screenshot 2024-03-02 135747](https://github.com/NemroNeno/MERN_ChatApp/assets/138875480/5ef7e729-fb4c-48e6-8045-e3a4b70ef700)
 ![Screenshot 2024-03-02 135854](https://github.com/NemroNeno/MERN_ChatApp/assets/138875480/0784a815-edcd-44fa-8c90-e32a174c3848)
 
-
 # MERN Stack Chat Application
 
 A simple chat application built using the MERN stack (MongoDB, Express.js, React, Node.js).
 
 ## Table of Contents
+
 - [Introduction](#introduction)
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
@@ -40,22 +40,18 @@ Before running the application, make sure you have the following installed on yo
 
 Navigate to the `Client` folder:
 
-```bash
 step 1: command:cd Client
 step 2: command:npm install
 step 3:command: npm start
 
 This will start the React development server, and you can access the client application at http://localhost:3000.
 
-
-
 ## Server
 
 Navigate to the `Server` folder:
 
-```bash
 step 1:command:cd Server
-step 2:  command:npm install
+step 2: command:npm install
 step 3: add .env file with the following data intit:
 ::
 
@@ -67,10 +63,11 @@ step 4: command: nodemon app.js
 
 This will start the express server, and you can access the api application at http://localhost:3200.
 
-
 ## Contributing
+
 If you'd like to contribute to this project, feel free to fork the repository and submit pull requests. Contributions are always welcome!
 There are still many areas for improvement in this app.
 
 ## License
+
 This project is licensed under the MIT License.
