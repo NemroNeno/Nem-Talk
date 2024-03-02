@@ -41,9 +41,9 @@ Before running the application, make sure you have the following installed on yo
 Navigate to the `Client` folder:
 
 ```bash
-command:cd Client
-command:npm install
-command: npm start
+step 1: command:cd Client
+step 2: command:npm install
+step 3:command: npm start
 
 This will start the React development server, and you can access the client application at http://localhost:3000.
 
@@ -54,9 +54,16 @@ This will start the React development server, and you can access the client appl
 Navigate to the `Server` folder:
 
 ```bash
-command:cd Server
-command:npm install
-command: nodemon app.js
+step 1:command:cd Server
+step 2:  command:npm install
+step 3: add .env file with the following data intit:
+::
+
+MONGO_URL="YOUR MONGODB CONNECTION STRING"
+JWT_SECRET="ANY STRING KEY"
+::
+
+step 4: command: nodemon app.js
 
 This will start the express server, and you can access the api application at http://localhost:3200.
 
