@@ -36,7 +36,7 @@ Before running the application, make sure you have the following installed on yo
 
 ## Installation
 
-### Client
+## Client
 
 Navigate to the `Client` folder:
 
@@ -49,7 +49,7 @@ This will start the React development server, and you can access the client appl
 
 
 
-### Server
+## Server
 
 Navigate to the `Server` folder:
 
@@ -68,9 +68,9 @@ step 4: command: nodemon app.js
 This will start the express server, and you can access the api application at http://localhost:3200.
 
 
-### Contributing
+## Contributing
 If you'd like to contribute to this project, feel free to fork the repository and submit pull requests. Contributions are always welcome!
 There are still many areas for improvement in this app.
 
-License
+## License
 This project is licensed under the MIT License.
