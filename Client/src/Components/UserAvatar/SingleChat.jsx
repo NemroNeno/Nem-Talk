@@ -31,30 +31,41 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
 
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
+
   const [newMessage, setNewMessage] = useState("");
-  const [socketConnected, setSocketConnected] = useState(false);
-  const [isTyping, setIsTyping] = useState(false);
+  const [socketConnected, setSocketConnected] = useState();
+  const [isTyping, setIsTyping] = useState();
 
   const socket = useMemo(() => io(ENDPOINT), []);
 
   useEffect(() => {
-    socket.on("typingEvent", (packet) => {
-      if (packet?.auth === auth?.user?._id || isTyping === true) {
+    let ident;
+
+    const handleTypingEvent = (packet) => {
+      if (packet?.auth === auth?.user?._id || isTyping) {
         return;
       } else {
         setIsTyping(true);
-        setTimeout(() => {
+        ident = setTimeout(() => {
           setIsTyping(false);
-        }, 5000);
+        }, 3000);
       }
-    });
-  }, []);
+    };
+
+    socket.on("typingEvent", handleTypingEvent);
+
+    return () => {
+     
+      socket.off("typingEvent", handleTypingEvent);
+    };
+  }, [socket, isTyping, auth]);
 
   useEffect(() => {
     const handleNewMessage = (newMessageReceived) => {
       if (auth.user._id === newMessageReceived.sender._id) return;
       setMessages((prevMessages) => [...prevMessages, newMessageReceived]);
       console.log(messages);
+      setIsTyping(false);
     };
     socket.on("messageRecieved", handleNewMessage);
   }, []);
@@ -134,6 +145,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
       room: selectedChat._id,
       auth: auth.user._id,
     });
+
     setNewMessage(e.target.value);
   };
 

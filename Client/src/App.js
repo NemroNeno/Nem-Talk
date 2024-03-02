@@ -7,7 +7,7 @@ import ChatsPage from './Pages/ChatsPage';
 
 function App() {
   return (
-    <div className='App'>
+    <div className='App !w-screen'>
     <Routes>
 
        <Route path='/' element={<Homepage/>}/>   

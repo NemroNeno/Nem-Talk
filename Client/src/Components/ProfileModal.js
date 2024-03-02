@@ -10,13 +10,13 @@ import {
   ModalHeader,
   ModalOverlay,
   Button,
-  IconButton
+  IconButton,
 } from "@chakra-ui/react";
 import { useAuth } from "./Authentication/Context/auth";
 
 const ProfileModal = ({ user, children }) => {
+  const [auth, setAuth] = useAuth();
 
-    const [auth,setAuth]=useAuth();
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
@@ -39,7 +39,18 @@ const ProfileModal = ({ user, children }) => {
             {user?.name}
           </ModalHeader>
           <ModalCloseButton />
-          <ModalBody display="flex" flexDir="column" justifyContent="space-between">Email: {user.email}</ModalBody>
+
+          <ModalBody
+            display="flex"
+            flexDir="column"
+            justifyContent="space-between"
+          >
+            <img
+              src={`http://localhost:3200/auth/getUserPhoto/${auth.user.email}`}
+              className="w-20 h-20 rounded-full"
+            />
+            Email: {user.email}
+          </ModalBody>
 
           <ModalFooter>
             <Button variantColor="blue" mr={3} onClick={onClose}>

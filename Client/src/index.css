@@ -13,7 +13,7 @@ body {
 }
 
 .App {
-  background-image: url("./Pictures/background.png");
+  background-image: url("./Pages/background.png");
   background-size: cover;
   background-position: center;
 }

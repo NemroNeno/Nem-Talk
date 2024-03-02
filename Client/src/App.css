@@ -1,8 +1,7 @@
-.App{
-    background-image: url("./Pictures/background.png");
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    min-height: 100vh;
-   
-   }
+.App {
+  background-image: url("./Pictures/unique.jpg");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  min-height: 100vh;
+}

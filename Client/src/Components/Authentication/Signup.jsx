@@ -152,15 +152,14 @@ const Signup = () => {
         </InputGroup>
       </FormControl>
 
-      <Button
+      <button
         width="100%"
-        colorScheme="green"
-        style={{ marginTop: 15 }}
+        className=" text-bold text-xl bg-gradient-to-tr hover:text-red-600 from-blue-900 to-black w-full h-[40px] mt-[40px] hover:bg-gradient-to-bl  duration-500  hover:from-blue-900 hover:to-gray-900 anime !transition-colors"
         onClick={handleSubmit}
         isLoading={loading}
       >
         Sign Up
-      </Button>
+      </button>
     </VStack>
   );
 };

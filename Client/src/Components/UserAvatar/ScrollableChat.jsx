@@ -3,25 +3,10 @@ import ScrollableFeed from 'react-scrollable-feed'
 import { useAuth } from '../Authentication/Context/auth'
 
 const ScrollableChat = ({messages,socket}) => {
-const [animate,setAnimate]=useState(false);
 const[auth,setAuth]= useAuth();
 
 
 
-const isSameSender= (messages,m,i,userId)=>{
-    return (
-        i<messages.length-1 && (messages[i+1].sender_id!==m.sender_id
-            ||messages[i+1].sender_id===undefined)&&
-            messages[i].sender_id!==userId
-
-    );
-}
-
-
-const isSameUser = (messages, m, i) => {
-    return i > 0 && messages[i - 1].sender._id === m.sender._id;
-  };
-  
 
 
 const isSameSenderMargin = (messages, m, i, userId) => {
@@ -44,13 +29,7 @@ const isSameSenderMargin = (messages, m, i, userId) => {
   };
 
 
-const isLastMessage = (messages,i,userId)=>{
-    return (
-        i===messages.length-1 &&
-        messages[messages.length-1].sender._id!==userId&&
-        messages[messages.length-1].sender_id
-    );
-}
+
 
   return (
     <ScrollableFeed>
